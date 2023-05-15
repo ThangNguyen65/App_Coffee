@@ -1,4 +1,5 @@
 import 'package:app_coffee/BottomNavBar.dart';
+import 'package:app_coffee/login_page.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My App',
-      home: const BottomNavBars(),
+      home: const LoginPage(),
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff6750a4),
         useMaterial3: true,
