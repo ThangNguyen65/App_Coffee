@@ -4,6 +4,8 @@ import 'package:app_coffee/product.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'Khac.dart';
+
 class BottomNavBars extends StatefulWidget {
   const BottomNavBars({Key? key}) : super(key: key);
 
@@ -50,7 +52,9 @@ class _BottomNavBarsState extends State<BottomNavBars> {
             Container(
               child: const MyHome(),
             ),
-            Container(),
+            Container(
+              child: const Khac(),
+            ),
           ],
         ),
       ),
