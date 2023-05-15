@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/Search.dart';
+
+import 'Search.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});
@@ -15,22 +16,11 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(238, 238, 238, 1),
-        elevation: 0.0,
-        // leading: Container(
-        //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        //   child: const Text(
-        //     'Cửa hàng ',
-        //     style: TextStyle(
-        //         fontSize: 22.0,
-        //         color: Colors.black,
-        //         fontWeight: FontWeight.bold),
-        //   ),
-        // ),
-      ),
       body: ListView(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           GestureDetector(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
