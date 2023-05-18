@@ -1,3 +1,4 @@
+import 'package:app_coffee/BottomNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -90,30 +91,25 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const dangky(),
+                          builder: (context) => const BottomNavBars(),
                         ),
                         (route) => false);
                   },
-                  child: const Text('Login'),
-                ),
-                Text("--------------------- Hoặc------------------------"),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Thêm xử lý submit ở đây
-                  },
-                  child: Text('Submit'),
+                  child: const Text(
+                    'SIGN IN',
+                  ),
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const dangky(),
+                        ),
+                        (route) => false);
                     // TODO: Thêm xử lý submit ở đây
                   },
-                  child: Text('Submit'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // TODO: Thêm xử lý submit ở đây
-                  },
-                  child: Text('Tiếp tục bằng Google'),
+                  child: Text('SIGN UP'),
                 ),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:app_coffee/BottomNavBar.dart';
+import 'package:app_coffee/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -162,11 +163,11 @@ class _dangkyState extends State<dangky> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const BottomNavBars(),
+                                builder: (context) => const LoginPage(),
                               ),
                               (route) => false);
                         },
-                        child: const Text('Login'),
+                        child: const Text('Create account'),
                       ),
                     ],
                   ),
