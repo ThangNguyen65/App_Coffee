@@ -9,6 +9,22 @@ class describe extends StatefulWidget {
 
 class _describeState extends State<describe> {
   bool isHovered = false; //sự kiện Đã thêm vào danh sách yêu thích
+  bool isImageExpanded = false;
+  String expandedImageUrl = '';
+
+  void expandImage(String imageUrl) {
+    setState(() {
+      isImageExpanded = true;
+      expandedImageUrl = imageUrl;
+    });
+  }
+
+  void collapseImage() {
+    setState(() {
+      isImageExpanded = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,80 +43,123 @@ class _describeState extends State<describe> {
               alignment: Alignment.center,
               height: size.height - 400,
               width: size.width,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      alignment: Alignment.bottomRight,
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                          'https://www.vietnamembassy-arabsaudi.org/wp-content/uploads/2018/12/thinker-and-dreamer-coffee-1468217796-341239-1476858100.jpg'))),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  alignment: Alignment.bottomRight,
+                  fit: BoxFit.cover,
+                  image: isImageExpanded
+                      ? NetworkImage(expandedImageUrl) // Hiển thị ảnh lớn
+                      : const NetworkImage(
+                          'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg',
+                        ), // Hiển thị ảnh mặc định
+                ),
+              ),
             ),
           ),
 
           //Thanh nhỏ ảnh bên phải
           Positioned(
-              top: 100,
-              right: 24,
-              child: Container(
-                height: 276,
-                width: 73,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(children: [
+            top: 100,
+            right: 24,
+            child: Container(
+              height: 276,
+              width: 73,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              child: Column(
+                children: [
                   //Ảnh 1 thanh nhỏ
-                  Container(
-                    margin: const EdgeInsets.only(top: 6),
-                    height: 61,
-                    width: 61,
-                    decoration: BoxDecoration(
+                  GestureDetector(
+                    onTap: () {
+                      expandImage(
+                          'https://i.pinimg.com/564x/bf/9f/bc/bf9fbc2657e5b0f5b74b01cdfb8ed2ec.jpg');
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 6),
+                      height: 61,
+                      width: 61,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey, width: 2),
                         image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://images.foody.vn/images/foody-jouri-dessert-tea-828-636179332977280733(1).jpg'))),
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            'https://i.pinimg.com/564x/bf/9f/bc/bf9fbc2657e5b0f5b74b01cdfb8ed2ec.jpg',
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   //Ảnh 2 thanh nhỏ
-                  Container(
-                    margin: const EdgeInsets.only(top: 6),
-                    height: 61,
-                    width: 61,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.grey, width: 2),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://images.foody.vn/images/foody-jouri-dessert-tea-828-636179332977280733(1).jpg'))),
+                  GestureDetector(
+                    onTap: () {
+                      expandImage(
+                        'https://i.pinimg.com/564x/fc/34/df/fc34df9d70e2408699b13c95126b0deb.jpg',
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 6),
+                      height: 61,
+                      width: 61,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: Colors.grey, width: 2),
+                          image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  'https://i.pinimg.com/564x/fc/34/df/fc34df9d70e2408699b13c95126b0deb.jpg'))),
+                    ),
                   ),
                   //Ảnh 3 thanh nhỏ
-                  Container(
-                    margin: const EdgeInsets.only(top: 6),
-                    height: 61,
-                    width: 61,
-                    decoration: BoxDecoration(
+                  GestureDetector(
+                    onTap: () {
+                      expandImage(
+                        'https://i.pinimg.com/564x/a3/2e/ae/a32eae835305c6c01b301c64fc14ded3.jpg',
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 6),
+                      height: 61,
+                      width: 61,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey, width: 2),
                         image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://images.foody.vn/images/foody-jouri-dessert-tea-828-636179332977280733(1).jpg'))),
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            'https://i.pinimg.com/564x/a3/2e/ae/a32eae835305c6c01b301c64fc14ded3.jpg',
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   //Ảnh 4 thanh nhỏ
-                  Container(
-                    margin: const EdgeInsets.only(top: 6),
-                    height: 61,
-                    width: 61,
-                    decoration: BoxDecoration(
+                  GestureDetector(
+                    onTap: () {
+                      expandImage(
+                        'https://i.pinimg.com/564x/89/3a/2f/893a2f5c800243084459f658afeb0547.jpg',
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 6),
+                      height: 61,
+                      width: 61,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey, width: 2),
                         image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://images.foody.vn/images/foody-jouri-dessert-tea-828-636179332977280733(1).jpg'))),
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            'https://i.pinimg.com/564x/89/3a/2f/893a2f5c800243084459f658afeb0547.jpg',
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ]),
-              )),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
       bottomSheet: Container(
@@ -108,10 +167,6 @@ class _describeState extends State<describe> {
         width: size.width,
         decoration: const BoxDecoration(
           color: Colors.white,
-          // borderRadius: BorderRadius.only(
-          //   topLeft: Radius.circular(34),
-          //   topRight: Radius.circular(34),
-          // ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -174,10 +229,10 @@ class _describeState extends State<describe> {
                 child: Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(3.0),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: BorderRadius.circular(4.0),
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(6.0),
                       ),
                       child: const Icon(
                         Icons.subdirectory_arrow_right_rounded,
@@ -272,10 +327,10 @@ class _describeState extends State<describe> {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(3.0),
+                        padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[400],
-                          borderRadius: BorderRadius.circular(4.0),
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(6.0),
                         ),
                         child: const Icon(
                           Icons.favorite_border,
@@ -347,10 +402,10 @@ class _describeState extends State<describe> {
                         );
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(3.0),
+                        padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
-                          color: Colors.grey[400],
-                          borderRadius: BorderRadius.circular(4.0),
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(6.0),
                         ),
                         child: const Icon(
                           Icons.phone,
