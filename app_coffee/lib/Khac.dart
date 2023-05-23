@@ -1,4 +1,7 @@
 import 'package:app_coffee/login_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Khac extends StatefulWidget {
@@ -9,6 +12,22 @@ class Khac extends StatefulWidget {
 }
 
 class _KhacState extends State<Khac> {
+  final user = FirebaseAuth.instance.currentUser!;
+  // document IDs
+  List<String> docIDs = [];
+
+  // get docIDs
+  Future getDocId() async {
+    await FirebaseFirestore.instance.collection('users').get().then(
+          (snapshot) => snapshot.docs.forEach(
+            (document) {
+              print(document.reference);
+              docIDs.add(document.reference.id);
+            },
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,15 +43,15 @@ class _KhacState extends State<Khac> {
                     children: [
                       Column(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.account_circle_rounded,
                             size: 80,
                           ),
                         ],
                       ),
                       Column(
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "User Name",
                             style: TextStyle(
                               color: Colors.white,
@@ -40,7 +59,7 @@ class _KhacState extends State<Khac> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "Trả trước",
                             style: TextStyle(
                               color: Colors.white,
@@ -48,7 +67,7 @@ class _KhacState extends State<Khac> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "Drops :0",
                             style: TextStyle(
                               color: Colors.white,
@@ -58,7 +77,7 @@ class _KhacState extends State<Khac> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                     ],
@@ -66,19 +85,19 @@ class _KhacState extends State<Khac> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 25,
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(25),
+                padding: const EdgeInsets.all(25),
                 color: Colors.grey[100],
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Tài khoản",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -87,11 +106,11 @@ class _KhacState extends State<Khac> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
@@ -100,14 +119,14 @@ class _KhacState extends State<Khac> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(children: [
-                            Icon(Icons.account_box_rounded),
-                            SizedBox(
+                            const Icon(Icons.account_box_rounded),
+                            const SizedBox(
                               width: 12,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Hồ sơ",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -117,15 +136,15 @@ class _KhacState extends State<Khac> {
                               ],
                             ),
                           ]),
-                          Icon(Icons.arrow_forward_ios_rounded),
+                          const Icon(Icons.arrow_forward_ios_rounded),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 9,
                     ),
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
@@ -134,14 +153,14 @@ class _KhacState extends State<Khac> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(children: [
-                            Icon(Icons.settings),
-                            SizedBox(
+                            const Icon(Icons.settings),
+                            const SizedBox(
                               width: 12,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   "Cài đặt",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -151,15 +170,15 @@ class _KhacState extends State<Khac> {
                               ],
                             ),
                           ]),
-                          Icon(Icons.arrow_forward_ios_rounded),
+                          const Icon(Icons.arrow_forward_ios_rounded),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 9,
                     ),
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
@@ -168,22 +187,18 @@ class _KhacState extends State<Khac> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(children: [
-                            Icon(Icons.settings),
-                            SizedBox(
+                            const Icon(Icons.settings),
+                            const SizedBox(
                               width: 12,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => LoginPage()),
-                                    );
+                                MaterialButton(
+                                  onPressed: () {
+                                    FirebaseAuth.instance.signOut();
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Đăng xuất',
                                     style: TextStyle(
                                         color: Colors.black,
@@ -195,7 +210,7 @@ class _KhacState extends State<Khac> {
                               ],
                             ),
                           ]),
-                          Icon(Icons.arrow_forward_ios_rounded),
+                          const Icon(Icons.arrow_forward_ios_rounded),
                         ],
                       ),
                     ),

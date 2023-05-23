@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
 import 'SearchProduct.dart';
 
 class SliderScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class SliderScreen extends StatefulWidget {
 }
 
 class _SliderScreenState extends State<SliderScreen> {
+<<<<<<< HEAD
   // Chọn loại sản phẩm được chọn
   int selectedCategoryIndex = 0;
 
@@ -102,6 +104,8 @@ class _SliderScreenState extends State<SliderScreen> {
       ],
     ),
   ];
+=======
+>>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
   List imageList = [
     {"id": 1, "image_path": 'assets/images/bn3.jpg'},
     {"id": 2, "image_path": 'assets/images/bn1.jpg'},
@@ -113,25 +117,20 @@ class _SliderScreenState extends State<SliderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.black,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.grey),
-        leading: const Icon(
-          Icons.person,
-          size: 40,
-        ),
+        iconTheme: const IconThemeData(color: Colors.orange),
+        leading: const Icon(Icons.person),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
             child: Row(
               children: [
                 InkWell(
-                  child: const Icon(
-                    Icons.search,
-                    size: 40,
-                  ),
+                  child: const Icon(Icons.search),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -226,6 +225,7 @@ class _SliderScreenState extends State<SliderScreen> {
                 ],
               ),
             ),
+<<<<<<< HEAD
             const SizedBox(
               height: 20,
             ),
@@ -879,24 +879,11 @@ class _SliderScreenState extends State<SliderScreen> {
                 ),
               ],
             )
+=======
+>>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
           ],
         ),
       ),
     );
   }
-}
-
-class Category {
-  final String name;
-  final List<Advertisement> advertisement;
-  Category({required this.name, required this.advertisement});
-}
-
-class Advertisement {
-  final String imageUrl;
-  final String name;
-  final String date;
-
-  Advertisement(
-      {required this.imageUrl, required this.date, required this.name});
 }

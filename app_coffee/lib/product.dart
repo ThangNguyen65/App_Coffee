@@ -17,7 +17,7 @@ class _testProductState extends State<testProduct> {
       products: [
         Product(
           name: 'Phin Đen Đá',
-          imageUrl: 'assets/images/coffee.png',
+          imageUrl: 'assets/images/tea.png',
           price: 1.99,
         ),
         Product(
@@ -203,6 +203,7 @@ class _testProductState extends State<testProduct> {
           Icons.person,
           size: 40,
         ),
+<<<<<<< HEAD
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
@@ -292,6 +293,54 @@ class _testProductState extends State<testProduct> {
                                     ? Colors.blue
                                     : Colors.transparent,
                               ),
+=======
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: TextField(
+            style: const TextStyle(color: Colors.black),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.grey[300],
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide.none,
+              ),
+              hintText: "Tìm kiếm",
+              suffixIcon: const Icon(Icons.search),
+              prefixIconColor: Colors.purple,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 3,
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    categories.length,
+                    (index) => GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedCategoryIndex = index;
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 3,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: selectedCategoryIndex == index ? 2 : 0,
+                              color: selectedCategoryIndex == index
+                                  ? Colors.blue
+                                  : Colors.transparent,
+>>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
                             ),
                           ),
                           child: Column(
@@ -315,6 +364,7 @@ class _testProductState extends State<testProduct> {
                     ),
                   ),
                 ),
+<<<<<<< HEAD
                 const SizedBox(
                   height: 15,
                 ),
@@ -380,13 +430,70 @@ class _testProductState extends State<testProduct> {
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[700],
+=======
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Container(
+                child: Text(
+                  categories[selectedCategoryIndex].name,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                padding: EdgeInsets.only(left: 12),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: categories[selectedCategoryIndex].products.length,
+            padding: const EdgeInsets.all(5),
+            itemBuilder: (context, index) {
+              return Container(
+                child: Column(
+                  children: [
+                    Card(
+                      child: ListTile(
+                        leading: Image.asset(
+                          categories[selectedCategoryIndex]
+                              .products[index]
+                              .imageUrl,
                         ),
+                        title: Text(
+                          categories[selectedCategoryIndex]
+                              .products[index]
+                              .name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+>>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
+                        ),
+                        subtitle: Text(
+                          '\$${categories[selectedCategoryIndex].products[index].price}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        trailing: IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.add)),
                       ),
                     ),
                   ],
+<<<<<<< HEAD
                 );
               },
             ),
+=======
+                ),
+              );
+            },
+>>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
           ),
         ],
       ),
