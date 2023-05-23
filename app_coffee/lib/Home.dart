@@ -12,6 +12,7 @@ class SliderScreen extends StatefulWidget {
 class _SliderScreenState extends State<SliderScreen> {
   // Chọn loại sản phẩm được chọn
   int selectedCategoryIndex = 0;
+
   List<Category> categories = [
     Category(
       name: "Ưu Đãi Đặc Biệt",
@@ -19,7 +20,7 @@ class _SliderScreenState extends State<SliderScreen> {
         Advertisement(
           imageUrl:
               'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-          name: 'VUI HÈ CÓ ĐÔI - DEAL NHÀ CÓ CẶP',
+          name: 'HÈ CÓ ĐÔI - DEAL NHÀ CÓ CẶP',
           date: '01/05',
         ),
         Advertisement(
@@ -123,7 +124,7 @@ class _SliderScreenState extends State<SliderScreen> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 25.0),
+            padding: const EdgeInsets.only(right: 15.0),
             child: Row(
               children: [
                 InkWell(
@@ -140,16 +141,23 @@ class _SliderScreenState extends State<SliderScreen> {
                     );
                   },
                 ),
+                const SizedBox(
+                  width: 20,
+                ),
+                const Icon(
+                  Icons.shopping_cart,
+                  size: 35,
+                )
               ],
             ),
           ),
         ],
       ),
-      backgroundColor: Colors.grey[200],
+      //backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 7),
             //slide show
             Center(
               child: Stack(
@@ -238,7 +246,7 @@ class _SliderScreenState extends State<SliderScreen> {
               height: 15,
             ),
             Container(
-              height: 200, // Giới hạn chiều cao của ListView
+              height: 300, // Giới hạn chiều cao của ListView
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -250,21 +258,53 @@ class _SliderScreenState extends State<SliderScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                            width: 150,
-                            height: 150,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Tra sua',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           const Text(
                             '25.000đ',
-                            style: TextStyle(fontSize: 13),
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFF7E6),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Color(0xFFE57905),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -274,22 +314,54 @@ class _SliderScreenState extends State<SliderScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                            width: 150,
-                            height: 150,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Tra sua',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           const Text(
                             '25.000đ',
-                            style: TextStyle(fontSize: 13),
-                          )
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFF7E6),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Color(0xFFE57905),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -298,22 +370,54 @@ class _SliderScreenState extends State<SliderScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                            width: 150,
-                            height: 150,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Tra sua',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           const Text(
                             '25.000đ',
-                            style: TextStyle(fontSize: 13),
-                          )
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFF7E6),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Color(0xFFE57905),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -322,22 +426,54 @@ class _SliderScreenState extends State<SliderScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                            width: 150,
-                            height: 150,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Tra sua',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           const Text(
                             '25.000đ',
-                            style: TextStyle(fontSize: 13),
-                          )
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFF7E6),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Color(0xFFE57905),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -346,22 +482,54 @@ class _SliderScreenState extends State<SliderScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                            width: 150,
-                            height: 150,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Tra sua',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           const Text(
                             '25.000đ',
-                            style: TextStyle(fontSize: 13),
-                          )
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFF7E6),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Color(0xFFE57905),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -370,23 +538,58 @@ class _SliderScreenState extends State<SliderScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                            width: 150,
-                            height: 150,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
                               'Tra sua',
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 3,
                           ),
                           const Text(
                             '25.000đ',
-                            style: TextStyle(fontSize: 13),
-                          )
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFF7E6),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Color(0xFFE57905),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
+                      ),
+                      const SizedBox(
+                        width: 20,
                       ),
                     ],
                   ),
@@ -436,14 +639,16 @@ class _SliderScreenState extends State<SliderScreen> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: selectedCategoryIndex == index
-                                  ? Color.fromARGB(255, 248, 237, 190)
-                                  : Colors.grey[200],
+                                  ? Color.fromARGB(128, 255, 247, 230)
+                                  : Colors.white,
                             ),
                             child: Center(
                               child: Text(
                                 categories[index].name,
                                 style: const TextStyle(
-                                    fontSize: 16, color: Colors.black87),
+                                    fontSize: 16,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -483,25 +688,28 @@ class _SliderScreenState extends State<SliderScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            const SizedBox(
+                              height: 7,
+                            ),
                             Text(
                               categories[selectedCategoryIndex]
                                   .advertisement[0]
                                   .name,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.calendar_today,
                                   size: 16,
                                   color: Colors.grey,
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(
                                   categories[selectedCategoryIndex]
                                       .advertisement[0]
                                       .date,
-                                  style: TextStyle(fontSize: 16),
+                                  style: const TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
@@ -531,25 +739,28 @@ class _SliderScreenState extends State<SliderScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            const SizedBox(
+                              height: 7,
+                            ),
                             Text(
                               categories[selectedCategoryIndex]
                                   .advertisement[1]
                                   .name,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.calendar_today,
                                   size: 16,
                                   color: Colors.grey,
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(
                                   categories[selectedCategoryIndex]
                                       .advertisement[1]
                                       .date,
-                                  style: TextStyle(fontSize: 16),
+                                  style: const TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
@@ -584,31 +795,37 @@ class _SliderScreenState extends State<SliderScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            const SizedBox(
+                              height: 7,
+                            ),
                             Text(
                               categories[selectedCategoryIndex]
                                   .advertisement[2]
                                   .name,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.calendar_today,
                                   size: 16,
                                   color: Colors.grey,
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(
                                   categories[selectedCategoryIndex]
                                       .advertisement[2]
                                       .date,
-                                  style: TextStyle(fontSize: 16),
+                                  style: const TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
                           ],
                         ),
                       ),
+                    ),
+                    const SizedBox(
+                      width: 15,
                     ),
                     Expanded(
                       child: GestureDetector(
@@ -629,25 +846,28 @@ class _SliderScreenState extends State<SliderScreen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            const SizedBox(
+                              height: 7,
+                            ),
                             Text(
                               categories[selectedCategoryIndex]
                                   .advertisement[3]
                                   .name,
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.calendar_today,
                                   size: 16,
                                   color: Colors.grey,
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(
                                   categories[selectedCategoryIndex]
                                       .advertisement[3]
                                       .date,
-                                  style: TextStyle(fontSize: 16),
+                                  style: const TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
