@@ -31,6 +31,7 @@ class _KhacState extends State<Khac> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
+                  //đọc dữ liệu từ users
                   Container(
                     height: 90,
                     child: StreamBuilder<QuerySnapshot>(
@@ -87,6 +88,69 @@ class _KhacState extends State<Khac> {
                     const SizedBox(
                       height: 20,
                     ),
+                    // StreamBuilder<QuerySnapshot>(
+                    //   stream: users,
+                    //   builder: (BuildContext context,
+                    //       AsyncSnapshot<QuerySnapshot> snapshot) {
+                    //     if (snapshot.hasError) {
+                    //       return Text('Error');
+                    //     }
+                    //     if (snapshot.connectionState ==
+                    //         ConnectionState.waiting) {
+                    //       return Text('Loading...');
+                    //     }
+                    //     final data = snapshot.requireData;
+                    //     if (data.docs.isEmpty) {
+                    //       return Text('No data available');
+                    //     }
+                    //     final userData = data.docs.first;
+
+                    //     // Sử dụng dữ liệu từ profileData để hiển thị trong widget của bạn
+                    //     return GestureDetector(
+                    //       onTap: () {
+                    //         Get.to(editProfile());
+                    //       },
+                    //       child: Container(
+                    //         padding: const EdgeInsets.all(16),
+                    //         decoration: BoxDecoration(
+                    //           color: Colors.white,
+                    //           borderRadius: BorderRadius.circular(16),
+                    //         ),
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             Row(
+                    //               children: [
+                    //                 const Icon(Icons.account_box_rounded),
+                    //                 const SizedBox(width: 12),
+                    //                 Column(
+                    //                   crossAxisAlignment:
+                    //                       CrossAxisAlignment.start,
+                    //                   children: [
+                    //                     Text(
+                    //                       'Hồ sơ',
+                    //                       style: TextStyle(
+                    //                         fontWeight: FontWeight.bold,
+                    //                         fontSize: 16,
+                    //                       ),
+                    //                     ),
+                    //                     Text(
+                    //                       'Tên: ${userData['last name']}',
+                    //                       style: TextStyle(
+                    //                         fontSize: 14,
+                    //                       ),
+                    //                     ),
+                    //                   ],
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             const Icon(Icons.arrow_forward_ios_rounded),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -106,10 +170,10 @@ class _KhacState extends State<Khac> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Get.to(() => editProfile());
+                                    Get.to(() => EditProfile());
                                   },
                                   child: const Text(
-                                    "Hồ sơ",
+                                    "Hồ sơ ",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -145,7 +209,7 @@ class _KhacState extends State<Khac> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Get.to(() => editProfile());
+                                    // Get.to(() => editProfile());
                                   },
                                   child: const Text(
                                     "Cài đặt",
