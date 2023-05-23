@@ -17,7 +17,7 @@ class _testProductState extends State<testProduct> {
       products: [
         Product(
           name: 'Phin Đen Đá',
-          imageUrl: 'assets/images/coffee.png',
+          imageUrl: 'assets/images/tea.png',
           price: 1.99,
         ),
         Product(
@@ -200,7 +200,7 @@ class _testProductState extends State<testProduct> {
           height: 50,
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: TextField(
             style: const TextStyle(color: Colors.black),
             decoration: InputDecoration(
@@ -214,19 +214,13 @@ class _testProductState extends State<testProduct> {
               suffixIcon: const Icon(Icons.search),
               prefixIconColor: Colors.purple,
             ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchProduct()),
-              );
-            },
           ),
         ),
         const SizedBox(
           height: 3,
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -275,13 +269,13 @@ class _testProductState extends State<testProduct> {
                 height: 15,
               ),
               Container(
-                padding: const EdgeInsets.only(left: 12),
                 child: Text(
                   categories[selectedCategoryIndex].name,
                   textAlign: TextAlign.left,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                 ),
+                padding: EdgeInsets.only(left: 12),
               ),
             ],
           ),
@@ -291,35 +285,39 @@ class _testProductState extends State<testProduct> {
             itemCount: categories[selectedCategoryIndex].products.length,
             padding: const EdgeInsets.all(5),
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Card(
-                    child: ListTile(
-                      leading: Image.asset(
-                        categories[selectedCategoryIndex]
-                            .products[index]
-                            .imageUrl,
-                      ),
-                      title: Text(
-                        categories[selectedCategoryIndex].products[index].name,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+              return Container(
+                child: Column(
+                  children: [
+                    Card(
+                      child: ListTile(
+                        leading: Image.asset(
+                          categories[selectedCategoryIndex]
+                              .products[index]
+                              .imageUrl,
                         ),
-                      ),
-                      subtitle: Text(
-                        '\$${categories[selectedCategoryIndex].products[index].price}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
+                        title: Text(
+                          categories[selectedCategoryIndex]
+                              .products[index]
+                              .name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        subtitle: Text(
+                          '\$${categories[selectedCategoryIndex].products[index].price}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        trailing: IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.add)),
                       ),
-                      trailing: IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.add)),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),
