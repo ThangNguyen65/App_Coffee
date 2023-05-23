@@ -63,6 +63,7 @@ class _dangkyState extends State<dangky> {
       'last name': lastName,
       'phone': phone,
       'email': email,
+      'createdAt': FieldValue.serverTimestamp(),
     });
   }
 

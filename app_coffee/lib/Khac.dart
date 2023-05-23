@@ -1,8 +1,10 @@
+import 'package:app_coffee/editProfile.dart';
 import 'package:app_coffee/login_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Khac extends StatefulWidget {
   const Khac({super.key});
@@ -13,20 +15,10 @@ class Khac extends StatefulWidget {
 
 class _KhacState extends State<Khac> {
   final user = FirebaseAuth.instance.currentUser!;
-  // document IDs
-  List<String> docIDs = [];
-
-  // get docIDs
-  Future getDocId() async {
-    await FirebaseFirestore.instance.collection('users').get().then(
-          (snapshot) => snapshot.docs.forEach(
-            (document) {
-              print(document.reference);
-              docIDs.add(document.reference.id);
-            },
-          ),
-        );
-  }
+  final Stream<QuerySnapshot> users = FirebaseFirestore.instance
+      .collection('users')
+      .orderBy('createdAt', descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -39,49 +31,35 @@ class _KhacState extends State<Khac> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          const Icon(
-                            Icons.account_circle_rounded,
+                  Container(
+                    height: 90,
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: users,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error');
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text('Loading...');
+                        }
+                        final data = snapshot.requireData;
+                        if (data.docs.isEmpty) {
+                          return Text('No data available');
+                        }
+                        final userData = data.docs.first;
+
+                        return ListTile(
+                          leading: Icon(
+                            Icons.person,
                             size: 80,
                           ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          const Text(
-                            "User Name",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Text(
-                            "Trả trước",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Text(
-                            "Drops :0",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
+                          title: Text('My name ${userData['last name']}'),
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
             ),
@@ -126,11 +104,16 @@ class _KhacState extends State<Khac> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Hồ sơ",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => editProfile());
+                                  },
+                                  child: const Text(
+                                    "Hồ sơ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -160,11 +143,16 @@ class _KhacState extends State<Khac> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Cài đặt",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => editProfile());
+                                  },
+                                  child: const Text(
+                                    "Cài đặt",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                               ],
