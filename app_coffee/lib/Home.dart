@@ -10,8 +10,21 @@ class SliderScreen extends StatefulWidget {
   State<SliderScreen> createState() => _SliderScreenState();
 }
 
+class Category {
+  final String name;
+  final List<Advertisement> advertisement;
+  Category({required this.name, required this.advertisement});
+}
+
+class Advertisement {
+  final String imageUrl;
+  final String name;
+  final String date;
+  Advertisement(
+      {required this.imageUrl, required this.name, required this.date});
+}
+
 class _SliderScreenState extends State<SliderScreen> {
-<<<<<<< HEAD
   // Chọn loại sản phẩm được chọn
   int selectedCategoryIndex = 0;
 
@@ -104,8 +117,7 @@ class _SliderScreenState extends State<SliderScreen> {
       ],
     ),
   ];
-=======
->>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
+
   List imageList = [
     {"id": 1, "image_path": 'assets/images/bn3.jpg'},
     {"id": 2, "image_path": 'assets/images/bn1.jpg'},
@@ -123,14 +135,14 @@ class _SliderScreenState extends State<SliderScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.orange),
-        leading: const Icon(Icons.person),
+        leading: const Icon(Icons.person, size: 35),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
             child: Row(
               children: [
                 InkWell(
-                  child: const Icon(Icons.search),
+                  child: const Icon(Icons.search, size: 35),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -141,7 +153,7 @@ class _SliderScreenState extends State<SliderScreen> {
                   },
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 14,
                 ),
                 const Icon(
                   Icons.shopping_cart,
@@ -225,7 +237,7 @@ class _SliderScreenState extends State<SliderScreen> {
                 ],
               ),
             ),
-<<<<<<< HEAD
+
             const SizedBox(
               height: 20,
             ),
@@ -261,7 +273,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              'https://luckychillcafe.com/thumbs/540x540x1/upload/product/imgl3261-3021.jpg?gidzl=rhbJEYsyhKFPhbOuBQQaHzQhLpuqzVn3ogzLR3Eag1ZFgmSpEwUlJSAhNJbgeATCmwqBPJFCFCfDABseGW',
                               width: 150,
                               height: 150,
                             ),
@@ -272,16 +284,16 @@ class _SliderScreenState extends State<SliderScreen> {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Tra sua',
+                              'Bánh Cookie Đá Xoay',
                               style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           ),
                           const SizedBox(
                             height: 3,
                           ),
                           const Text(
-                            '25.000đ',
+                            '38.000đ',
                             style: TextStyle(fontSize: 15),
                           ),
                           const SizedBox(
@@ -879,8 +891,6 @@ class _SliderScreenState extends State<SliderScreen> {
                 ),
               ],
             )
-=======
->>>>>>> c7d785be837289cf4ebdf74b8655ad95767fbb7a
           ],
         ),
       ),
