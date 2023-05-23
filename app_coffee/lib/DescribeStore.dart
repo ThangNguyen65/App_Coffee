@@ -57,6 +57,19 @@ class _describeState extends State<describe> {
             ),
           ),
 
+          // Nút quay về
+          Positioned(
+            top: 20,
+            left: 5,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pop(
+                    context); // Điều hướng ngược trở lại màn hình trước đó
+              },
+            ),
+          ),
           //Thanh nhỏ ảnh bên phải
           Positioned(
             top: 100,
@@ -72,7 +85,7 @@ class _describeState extends State<describe> {
                   GestureDetector(
                     onTap: () {
                       expandImage(
-                          'https://i.pinimg.com/564x/bf/9f/bc/bf9fbc2657e5b0f5b74b01cdfb8ed2ec.jpg');
+                          'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg');
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 6),
@@ -84,7 +97,7 @@ class _describeState extends State<describe> {
                         image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            'https://i.pinimg.com/564x/bf/9f/bc/bf9fbc2657e5b0f5b74b01cdfb8ed2ec.jpg',
+                            'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg',
                           ),
                         ),
                       ),

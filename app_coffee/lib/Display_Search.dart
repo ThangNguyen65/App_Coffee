@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'Search.dart';
+import 'package:flutter_project/Describe/DescribeStore.dart';
+import 'package:flutter_project/Search.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});
@@ -16,11 +16,22 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(238, 238, 238, 1),
+        elevation: 0.0,
+        // leading: Container(
+        //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        //   child: const Text(
+        //     'Cửa hàng ',
+        //     style: TextStyle(
+        //         fontSize: 22.0,
+        //         color: Colors.black,
+        //         fontWeight: FontWeight.bold),
+        //   ),
+        // ),
+      ),
       body: ListView(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           GestureDetector(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -54,7 +65,7 @@ class _MyHomeState extends State<MyHome> {
                     // Thực hiện chuyển đến trang khác khi người dùng nhấp vào
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => search()),
+                      MaterialPageRoute(builder: (context) => describe()),
                     );
                   },
                   child: Container(
@@ -70,7 +81,7 @@ class _MyHomeState extends State<MyHome> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              'https://www.vietnamembassy-arabsaudi.org/wp-content/uploads/2018/12/thinker-and-dreamer-coffee-1468217796-341239-1476858100.jpg',
+                              'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg',
                               width: 100,
                               height: 100,
                             ),
