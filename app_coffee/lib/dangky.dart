@@ -27,6 +27,9 @@ class _dangkyState extends State<dangky> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
+  String? _errorMessage;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -38,25 +41,50 @@ class _dangkyState extends State<dangky> {
     super.dispose();
   }
 
-  Future signUp() async {
-    //authenticate user
-    if (passwordConfirmed()) {
-      //create user
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-      // add user details
-      addUserDetails(
-        _firstNameController.text.trim(),
-        _lastNameController.text.trim(),
-        _emailController.text.trim(),
-        int.parse(_phoneController.text.trim()),
-      );
+  Future<void> signUp() async {
+    if (_formKey.currentState!.validate()) {
+      // Validate form fields
+      if (!passwordConfirmed()) {
+        setState(() {
+          _errorMessage = 'Mật khẩu và xác nhận mật khẩu không khớp.';
+        });
+        return;
+      }
+
+      try {
+        // Create user
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+
+        // Add user details
+        await addUserDetails(
+          _firstNameController.text.trim(),
+          _lastNameController.text.trim(),
+          _emailController.text.trim(),
+          int.parse(_phoneController.text.trim()),
+        );
+
+        // Clear form fields
+        _emailController.clear();
+        _passwordController.clear();
+        _confirmPasswordController.clear();
+        _firstNameController.clear();
+        _lastNameController.clear();
+        _phoneController.clear();
+
+        // Show success message
+        setState(() {
+          _errorMessage = 'Đăng ký thành công!';
+        });
+      } catch (e) {
+        print('Lỗi đăng ký: $e');
+      }
     }
   }
 
-  Future addUserDetails(
+  Future<void> addUserDetails(
       String firstName, String lastName, String email, int phone) async {
     await FirebaseFirestore.instance.collection('users').add({
       'first name': firstName,
@@ -68,12 +96,8 @@ class _dangkyState extends State<dangky> {
   }
 
   bool passwordConfirmed() {
-    if (_passwordController.text.trim() ==
-        _confirmPasswordController.text.trim()) {
-      return true;
-    } else {
-      return false;
-    }
+    return _passwordController.text.trim() ==
+        _confirmPasswordController.text.trim();
   }
 
   @override
@@ -82,6 +106,7 @@ class _dangkyState extends State<dangky> {
     double h = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      key: _scaffoldKey,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -128,7 +153,7 @@ class _dangkyState extends State<dangky> {
                       ),
                       SizedBox(
                         width: 200,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _emailController,
                           decoration: InputDecoration(
                             labelText: 'Email',
@@ -139,6 +164,12 @@ class _dangkyState extends State<dangky> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Vui lòng nhập email.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       SizedBox(
@@ -146,7 +177,7 @@ class _dangkyState extends State<dangky> {
                       ),
                       SizedBox(
                         width: 200,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _phoneController,
                           decoration: InputDecoration(
                             labelText: 'Phone number',
@@ -157,6 +188,12 @@ class _dangkyState extends State<dangky> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Vui lòng nhập số điện thoại.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       SizedBox(
@@ -164,7 +201,7 @@ class _dangkyState extends State<dangky> {
                       ),
                       SizedBox(
                         width: 200,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _firstNameController,
                           decoration: InputDecoration(
                             labelText: 'First Name',
@@ -175,6 +212,12 @@ class _dangkyState extends State<dangky> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Vui lòng nhập tên.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       SizedBox(
@@ -182,7 +225,7 @@ class _dangkyState extends State<dangky> {
                       ),
                       SizedBox(
                         width: 200,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _lastNameController,
                           decoration: InputDecoration(
                             labelText: 'Last Name',
@@ -193,13 +236,20 @@ class _dangkyState extends State<dangky> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Vui lòng nhập họ.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       SizedBox(height: 10),
                       SizedBox(
                         width: 200,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _passwordController,
+                          obscureText: true,
                           decoration: InputDecoration(
                             labelText: 'Password',
                             border: OutlineInputBorder(
@@ -209,15 +259,22 @@ class _dangkyState extends State<dangky> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Vui lòng nhập mật khẩu.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       SizedBox(height: 10),
                       SizedBox(
                         width: 200,
-                        child: TextField(
+                        child: TextFormField(
                           controller: _confirmPasswordController,
+                          obscureText: true,
                           decoration: InputDecoration(
-                            labelText: 'confirm password',
+                            labelText: 'Confirm Password',
                             border: OutlineInputBorder(
                               borderSide: BorderSide(),
                               borderRadius: BorderRadius.circular(10),
@@ -225,6 +282,12 @@ class _dangkyState extends State<dangky> {
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Vui lòng xác nhận mật khẩu.';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -244,6 +307,11 @@ class _dangkyState extends State<dangky> {
                           const Text('Đồng ý với các điều khoản '),
                         ],
                       ),
+                      if (_errorMessage != null)
+                        Text(
+                          _errorMessage!,
+                          style: TextStyle(color: Colors.red),
+                        ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: GestureDetector(
@@ -255,14 +323,15 @@ class _dangkyState extends State<dangky> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
-                                child: Text(
-                              "Sign Up",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
                               ),
-                            )),
+                            ),
                           ),
                         ),
                       ),
