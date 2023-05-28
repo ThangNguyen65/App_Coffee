@@ -18,6 +18,7 @@ class dangky extends StatefulWidget {
 class _dangkyState extends State<dangky> {
   bool _isChecked1 = false;
   bool _isChecked2 = false;
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -26,7 +27,7 @@ class _dangkyState extends State<dangky> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
+// kiểm tra lỗi
   String? _errorMessage;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
