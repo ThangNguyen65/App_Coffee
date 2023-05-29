@@ -49,9 +49,9 @@ class _BottomNavBarsState extends State<BottomNavBars> {
             Container(
               child: const testProduct(),
             ),
-            Container(
-              child: const MyHome(),
-            ),
+            // Container(
+            //   child: const MyHome(),
+            // ),
             Container(
               child: const Khac(),
             ),
