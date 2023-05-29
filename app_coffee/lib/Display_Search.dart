@@ -2,6 +2,12 @@
 // import 'package:app_coffee/Search.dart';
 // import 'package:flutter/material.dart';
 
+// import 'package:flutter/material.dart';
+// import 'package:flutter_project/Describe/Describe.dart';
+// import 'package:flutter_project/Search.dart';
+// import 'package:flutter_project/Test/describe_details_screen.dart';
+
+
 // class MyHome extends StatefulWidget {
 //   const MyHome({super.key});
 
@@ -19,6 +25,7 @@
 //       appBar: AppBar(
 //         backgroundColor: Color.fromRGBO(238, 238, 238, 1),
 //         elevation: 0.0,
+
 //         // leading: Container(
 //         //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
 //         //   child: const Text(
@@ -35,6 +42,12 @@
 //           GestureDetector(
 //             child: Container(
 //               padding: EdgeInsets.symmetric(horizontal: 10.0),
+//       ),
+//       body: Column(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(10.0),
+//             child: Container(
 //               child: TextField(
 //                 decoration: InputDecoration(
 //                   hintText: 'Tìm kiếm',
@@ -50,6 +63,7 @@
 //                   Navigator.push(
 //                     context,
 //                     MaterialPageRoute(builder: (context) => const search()),
+//                     MaterialPageRoute(builder: (context) => search()),
 //                   );
 //                 },
 //               ),
@@ -361,6 +375,76 @@
 //                 ),
 //                 const SizedBox(height: 15.0),
 //               ],
+// =======
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: describeList.length,
+//               itemBuilder: (context, index) {
+//                 final describe = describeList[index];
+
+//                 return Padding(
+//                   padding: const EdgeInsets.symmetric(vertical: 8.0),
+//                   child: GestureDetector(
+//                     onTap: () {
+//                       Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => DescribeDetailScreen(
+//                             describe: describe,
+//                           ),
+//                         ),
+//                       );
+//                     },
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         borderRadius: BorderRadius.circular(15),
+//                         color: Colors.white,
+//                       ),
+//                       margin: const EdgeInsets.symmetric(horizontal: 16),
+//                       child: Padding(
+//                         padding: const EdgeInsets.all(15.0),
+//                         child: Row(
+//                           children: [
+//                             ClipRRect(
+//                               borderRadius: BorderRadius.circular(20),
+//                               child: Image.network(
+//                                 describe.imageUrl,
+//                                 width: 100,
+//                                 height: 100,
+//                                 fit: BoxFit.cover,
+//                               ),
+//                             ),
+//                             SizedBox(width: 8),
+//                             Expanded(
+//                               child: Padding(
+//                                 padding: const EdgeInsets.all(15.0),
+//                                 child: Column(
+//                                   crossAxisAlignment: CrossAxisAlignment.start,
+//                                   children: [
+//                                     Text(
+//                                       describe.address,
+//                                       style: TextStyle(
+//                                         fontSize: 20,
+//                                         fontWeight: FontWeight.bold,
+//                                       ),
+//                                     ),
+//                                     Text(
+//                                       describe.name,
+//                                       style: TextStyle(fontSize: 16),
+//                                     ),
+//                                     const SizedBox(height: 15.0),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 );
+//               },
+// >>>>>>> 810dfc4e9e7984d78523c14a0d8e9b9a838d5da8
 //             ),
 //           ),
 //         ],

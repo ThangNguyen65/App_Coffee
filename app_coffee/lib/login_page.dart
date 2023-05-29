@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
       return 'Vui lòng nhập email';
     }
 
-    // Sử dụng regex để kiểm tra định dạng email có hợp lệ không
+    // Sử dụng regex để kiểm tra định dạng email có hợp lệ không ....
     String pattern =
         r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*?\.[a-zA-Z]{2,6})$';
     RegExp regex = RegExp(pattern);

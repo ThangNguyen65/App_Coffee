@@ -44,7 +44,7 @@ class _dangkyState extends State<dangky> {
 
   Future<void> signUp() async {
     if (_formKey.currentState!.validate()) {
-      // Validate form fields
+      // Validate form fields ...
       if (!passwordConfirmed()) {
         setState(() {
           _errorMessage = 'Mật khẩu và xác nhận mật khẩu không khớp.';
