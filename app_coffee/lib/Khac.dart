@@ -23,7 +23,7 @@ class _KhacState extends State<Khac> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[800],
+      backgroundColor: Color.fromARGB(158, 2, 93, 138),
       body: SafeArea(
         child: Column(
           children: [

@@ -1,4 +1,5 @@
 import 'package:app_coffee/BottomNavBar.dart';
+import 'editProfile.dart';
 
 import 'package:app_coffee/login_page.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: const Color(0xff6750a4),
         useMaterial3: true,
       ),
+      
     );
   }
 }

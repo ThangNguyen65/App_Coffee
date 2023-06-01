@@ -79,13 +79,14 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 10),
             Container(
-              width: w,
-              height: h * 0.3,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/coffee.png"),
-                  fit: BoxFit.cover,
+              child: const CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 165, 107, 6),
+                minRadius: 80.0,
+                child: CircleAvatar(
+                  radius: 70.0,
+                  backgroundImage: AssetImage('assets/images/nen.png'),
                 ),
               ),
             ),
@@ -93,64 +94,59 @@ class _LoginPageState extends State<LoginPage> {
               width: 500,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.elliptical(15, 15)),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
               child: Form(
-                key: _formKey, // Gán key cho Form
-                autovalidateMode:
-                    AutovalidateMode.always, // Kiểm tra tính hợp lệ liên tục
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.always,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Chào mừng bạn đến với",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                    ),
-                    const Text(
-                      "THE COFFEE HOUSE",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
+                    const SizedBox(height: 30),
                     SizedBox(
-                      width: 200,
+                      width: 350,
                       child: TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(),
+                            borderSide: const BorderSide(),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          hintStyle: TextStyle(color: Colors.brown),
+                          // Chỉnh màu chữ mặc định của trường nhập liệu
+
+                          // Chỉnh màu chữ khi đã nhập dữ liệu
                         ),
-                        validator: _validateEmail, // Gọi hàm validate email
+                        validator: _validateEmail,
                       ),
                     ),
+                    const SizedBox(height: 10),
                     SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: 200,
+                      width: 350,
                       child: TextFormField(
                         controller: _passwordController,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(),
+                            borderSide: const BorderSide(),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 16),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
+                          ),
+                          hintStyle: TextStyle(color: Colors.brown),
                         ),
-                        obscureText: true, // Ẩn chữ khi nhập
+                        obscureText: true,
                         validator: _validatePassword,
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
@@ -158,15 +154,17 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return ForgotPasswordPage();
-                              }));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return ForgotPasswordPage();
+                                }),
+                              );
                             },
-                            child: Text(
+                            child: const Text(
                               'Forgot Password?',
                               style: TextStyle(
-                                color: Colors.blue,
+                                color: Color.fromARGB(255, 110, 68, 6),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -174,24 +172,22 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: GestureDetector(
                         onTap: signIn,
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Colors.deepPurple,
+                            color: Color.fromARGB(255, 114, 74, 4),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Sign In",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Color.fromARGB(255, 213, 201, 236),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -200,11 +196,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           'Not a member?',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -212,10 +208,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: widget.showRegisterPage,
-                          child: Text(
+                          child: const Text(
                             'Register now',
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: Color.fromARGB(255, 62, 58, 2),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
