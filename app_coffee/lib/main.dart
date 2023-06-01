@@ -1,4 +1,5 @@
 import 'package:app_coffee/BottomNavBar.dart';
+import 'package:app_coffee/testfile.dart';
 import 'Login_SignUp/editProfile.dart';
 
 import 'package:app_coffee/Login_SignUp/login_page.dart';
@@ -24,12 +25,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My App',
-      home: const main_pages(),
+      home: main_pages(),
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff6750a4),
         useMaterial3: true,
       ),
-      
     );
   }
 }

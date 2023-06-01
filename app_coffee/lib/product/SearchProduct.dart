@@ -1,5 +1,5 @@
-import 'package:app_coffee/product/ProductDetail.dart';
-import 'package:app_coffee/product/product.dart';
+import 'package:app_coffee/ProductDetail.dart';
+import 'package:app_coffee/product.dart';
 import 'package:flutter/material.dart';
 
 class SearchProduct extends StatefulWidget {
@@ -10,6 +10,15 @@ class SearchProduct extends StatefulWidget {
 }
 
 class _SearchProductState extends State<SearchProduct> {
+  void navigateToProductDetail(Product product) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductDetail(product: product),
+      ),
+    );
+  }
+
   static List<Product> list_product = [
     Product(
       name: 'Phin Đen Đá',
@@ -259,7 +268,7 @@ class _SearchProductState extends State<SearchProduct> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(right: 16, left: 16, bottom: 16),
+        padding: const EdgeInsets.only(right: 0, left: 0, bottom: 0),
         child: Column(
           children: [
             Expanded(
@@ -275,25 +284,82 @@ class _SearchProductState extends State<SearchProduct> {
                     )
                   : ListView.builder(
                       itemCount: display_list_product.length,
-                      itemBuilder: (context, index) => ListTile(
-                        contentPadding: const EdgeInsets.all(8.0),
-                        title: Text(
-                          display_list_product[index].name!,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          '${display_list_product[index].price!}',
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                        leading: Image.asset(
-                          display_list_product[index].imageUrl!,
-                        ),
-                      ),
+                      // padding: const EdgeInsets.all(5),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                navigateToProductDetail(
+                                    display_list_product[index]);
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(width: 10),
+                                      Image.asset(
+                                        display_list_product[index].imageUrl!,
+                                        width: 80,
+                                        height: 80,
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            display_list_product[index].name!,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    width:
+                                        60, // Đặt chiều rộng tùy ý cho giá tiền
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${display_list_product[index].price!}',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        IconButton(
+                                          icon: const Icon(
+                                              Icons.shopping_cart_checkout),
+                                          onPressed: () {
+                                            // addToCart(
+                                            //     product); // Thay `product` bằng sản phẩm bạn muốn thêm vào giỏ hàng
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
-            )
+            ),
           ],
         ),
       ),
