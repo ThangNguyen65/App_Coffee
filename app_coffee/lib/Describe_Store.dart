@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/Describe/Describe.dart';
 
-class describe extends StatefulWidget {
-  const describe({super.key});
-
+class DescribeDetailScreen extends StatefulWidget {
+  final Describe describe;
+  const DescribeDetailScreen({Key? key, required this.describe})
+      : super(key: key);
   @override
-  State<describe> createState() => _describeState();
+  State<DescribeDetailScreen> createState() => _DescribeDetailScreenState();
 }
 
-class _describeState extends State<describe> {
-  bool isHovered = false; //sự kiện Đã thêm vào danh sách yêu thích
+class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
+ bool isHovered = false;
   bool isImageExpanded = false;
   String expandedImageUrl = '';
 
@@ -28,17 +30,12 @@ class _describeState extends State<describe> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    int index = 0;
     return Scaffold(
       body: Stack(
         children: [
-          //Ảnh lớn Mô tả
           Positioned(
             top: 0,
-            // child: ClipRRect(
-            //   borderRadius: BorderRadius.only(
-            //     bottomLeft: Radius.circular(50.0),
-            //     bottomRight: Radius.circular(50.0),
-            //   ),
             child: Container(
               alignment: Alignment.center,
               height: size.height - 400,
@@ -47,17 +44,20 @@ class _describeState extends State<describe> {
                 image: DecorationImage(
                   alignment: Alignment.bottomRight,
                   fit: BoxFit.cover,
+                  //Ảnh chính
                   image: isImageExpanded
                       ? NetworkImage(expandedImageUrl) // Hiển thị ảnh lớn
-                      : const NetworkImage(
-                          'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg',
-                        ), // Hiển thị ảnh mặc định
+                      : NetworkImage(index == 0
+                          ? widget.describe.imageUrl
+                          : index == 1
+                              ? widget.describe.imageUrl1
+                              : index == 2
+                                  ? widget.describe.imageUrl2
+                                  : widget.describe.imageUrl3), // Sử dụng đường dẫn ảnh mới từ các thuộc tính imageUrl, imageUrl1, imageUrl2 và imageUrl3
                 ),
               ),
             ),
           ),
-
-          // Nút quay về
           Positioned(
             top: 20,
             left: 5,
@@ -65,12 +65,10 @@ class _describeState extends State<describe> {
               icon: Icon(Icons.arrow_back),
               color: Colors.white,
               onPressed: () {
-                Navigator.pop(
-                    context); // Điều hướng ngược trở lại màn hình trước đó
+                Navigator.pop(context);
               },
             ),
           ),
-          //Thanh nhỏ ảnh bên phải
           Positioned(
             top: 100,
             right: 24,
@@ -78,14 +76,15 @@ class _describeState extends State<describe> {
               height: 276,
               width: 73,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Column(
                 children: [
-                  //Ảnh 1 thanh nhỏ
+                  //Ảnh nhỏ 1
                   GestureDetector(
                     onTap: () {
-                      expandImage(
-                          'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg');
+                      expandImage(widget.describe.imageUrl1);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 6),
@@ -94,41 +93,17 @@ class _describeState extends State<describe> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey, width: 2),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                            'https://i.pinimg.com/564x/70/fd/63/70fd633ca9a25cb64b612eeb17fd3cc6.jpg',
-                          ),
+                          image: NetworkImage(widget.describe.imageUrl1),
                         ),
                       ),
                     ),
                   ),
-                  //Ảnh 2 thanh nhỏ
+                  //Ảnh nhỏ 2
                   GestureDetector(
                     onTap: () {
-                      expandImage(
-                        'https://i.pinimg.com/564x/fc/34/df/fc34df9d70e2408699b13c95126b0deb.jpg',
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 6),
-                      height: 61,
-                      width: 61,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: Colors.grey, width: 2),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://i.pinimg.com/564x/fc/34/df/fc34df9d70e2408699b13c95126b0deb.jpg'))),
-                    ),
-                  ),
-                  //Ảnh 3 thanh nhỏ
-                  GestureDetector(
-                    onTap: () {
-                      expandImage(
-                        'https://i.pinimg.com/564x/a3/2e/ae/a32eae835305c6c01b301c64fc14ded3.jpg',
-                      );
+                      expandImage(widget.describe.imageUrl2);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 6),
@@ -137,21 +112,17 @@ class _describeState extends State<describe> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey, width: 2),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                            'https://i.pinimg.com/564x/a3/2e/ae/a32eae835305c6c01b301c64fc14ded3.jpg',
-                          ),
+                          image: NetworkImage(widget.describe.imageUrl2),
                         ),
                       ),
                     ),
                   ),
-                  //Ảnh 4 thanh nhỏ
+                  //Ảnh nhỏ 3
                   GestureDetector(
                     onTap: () {
-                      expandImage(
-                        'https://i.pinimg.com/564x/89/3a/2f/893a2f5c800243084459f658afeb0547.jpg',
-                      );
+                      expandImage(widget.describe.imageUrl3);
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 6),
@@ -160,11 +131,28 @@ class _describeState extends State<describe> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(color: Colors.grey, width: 2),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                            'https://i.pinimg.com/564x/89/3a/2f/893a2f5c800243084459f658afeb0547.jpg',
-                          ),
+                          image: NetworkImage(widget.describe.imageUrl3),
+                        ),
+                      ),
+                    ),
+                  ),
+                  //Ảnh nhỏ 4
+                  GestureDetector(
+                    onTap: () {
+                      expandImage(widget.describe.imageUrl4);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 6),
+                      height: 61,
+                      width: 61,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.grey, width: 2),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(widget.describe.imageUrl4),
                         ),
                       ),
                     ),
@@ -183,9 +171,7 @@ class _describeState extends State<describe> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               Center(
                 child: Container(
@@ -200,9 +186,9 @@ class _describeState extends State<describe> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    "Cái tiệm Coffee",
+                    widget.describe.name,
                     style: TextStyle(
                       color: Color(0xFF404040),
                       fontSize: 18,
@@ -210,7 +196,7 @@ class _describeState extends State<describe> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    '296 Quang Trung',
+                    widget.describe.address,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
@@ -219,7 +205,7 @@ class _describeState extends State<describe> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Giờ mở cửa: 7:00 - 22:00',
+                    widget.describe.time,
                     style: TextStyle(
                       color: Color(0xFF404040),
                       fontSize: 18,
@@ -254,9 +240,9 @@ class _describeState extends State<describe> {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        '293 Quang Trung, Quận Gò Vấp, Hồ Chí Minh, Việt Nam',
+                        widget.describe.detailed_address,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -352,9 +338,9 @@ class _describeState extends State<describe> {
                         ),
                       ),
                       const SizedBox(width: 5),
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'Thêm vào danh sách yêu thích',
+                          widget.describe.favorite,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -428,9 +414,9 @@ class _describeState extends State<describe> {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Liên hệ',
+                        widget.describe.phone,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
