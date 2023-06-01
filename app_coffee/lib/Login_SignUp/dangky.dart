@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:app_coffee/BottomNavBar.dart';
-import 'package:app_coffee/login_page.dart';
+import 'package:app_coffee/Login_SignUp/login_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +109,7 @@ class _dangkyState extends State<dangky> {
     return Scaffold(
       key: _scaffoldKey,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xFFD1A78F),
@@ -123,7 +123,7 @@ class _dangkyState extends State<dangky> {
           child: SingleChildScrollView(
             child: Container(
               width: w * 0.8,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
@@ -149,7 +149,7 @@ class _dangkyState extends State<dangky> {
                             fontWeight: FontWeight.bold,
                             color: Color(0xFFA6654E)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SizedBox(
@@ -159,10 +159,10 @@ class _dangkyState extends State<dangky> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: const BorderSide(),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
                           validator: (value) {
@@ -173,7 +173,7 @@ class _dangkyState extends State<dangky> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -183,10 +183,10 @@ class _dangkyState extends State<dangky> {
                           decoration: InputDecoration(
                             labelText: 'Phone number',
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: const BorderSide(),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
                           validator: (value) {
@@ -197,7 +197,7 @@ class _dangkyState extends State<dangky> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -207,10 +207,10 @@ class _dangkyState extends State<dangky> {
                           decoration: InputDecoration(
                             labelText: 'First Name',
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: const BorderSide(),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
                           validator: (value) {
@@ -221,7 +221,7 @@ class _dangkyState extends State<dangky> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       SizedBox(
@@ -231,10 +231,10 @@ class _dangkyState extends State<dangky> {
                           decoration: InputDecoration(
                             labelText: 'Last Name',
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: const BorderSide(),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12, horizontal: 16),
                           ),
                           validator: (value) {
@@ -245,7 +245,7 @@ class _dangkyState extends State<dangky> {
                           },
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       SizedBox(
                         width: 200,
                         child: TextFormField(

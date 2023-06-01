@@ -1,5 +1,5 @@
-import 'package:app_coffee/editProfile.dart';
-import 'package:app_coffee/login_page.dart';
+import 'package:app_coffee/Login_SignUp/editProfile.dart';
+import 'package:app_coffee/Login_SignUp/login_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

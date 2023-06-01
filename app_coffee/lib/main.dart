@@ -1,11 +1,11 @@
 import 'package:app_coffee/BottomNavBar.dart';
-import 'editProfile.dart';
+import 'Login_SignUp/editProfile.dart';
 
-import 'package:app_coffee/login_page.dart';
+import 'package:app_coffee/Login_SignUp/login_page.dart';
 
 import 'package:app_coffee/auth/auth_page.dart';
-import 'package:app_coffee/dangky.dart';
-import 'package:app_coffee/login_page.dart';
+import 'package:app_coffee/Login_SignUp/dangky.dart';
+import 'package:app_coffee/Login_SignUp/login_page.dart';
 import 'package:app_coffee/auth/main_page.dart';
 
 import 'package:flutter/material.dart';

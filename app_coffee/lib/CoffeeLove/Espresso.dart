@@ -1,4 +1,5 @@
-import 'package:app_coffee/Display_Store.dart';
+import 'package:app_coffee/BottomNavBar.dart';
+import 'package:app_coffee/store/Display_Store.dart';
 import 'package:flutter/material.dart';
 
 class Espresso extends StatefulWidget {
@@ -26,7 +27,7 @@ class _EspressoState extends State<Espresso> {
           color: Colors.black,
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MyHome()),
+              MaterialPageRoute(builder: (context) => BottomNavBars()),
             );
           },
         ),

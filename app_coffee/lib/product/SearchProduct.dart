@@ -1,5 +1,5 @@
-import 'package:app_coffee/ProductDetail.dart';
-import 'package:app_coffee/product.dart';
+import 'package:app_coffee/product/ProductDetail.dart';
+import 'package:app_coffee/product/product.dart';
 import 'package:flutter/material.dart';
 
 class SearchProduct extends StatefulWidget {

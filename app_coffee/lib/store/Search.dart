@@ -1,6 +1,6 @@
-import 'package:app_coffee/Describe.dart';
-import 'package:app_coffee/Describe_Store.dart';
-import 'package:app_coffee/Display_Store.dart';
+import 'package:app_coffee/store/Describe.dart';
+import 'package:app_coffee/store/Describe_Store.dart';
+import 'package:app_coffee/store/Display_Store.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {

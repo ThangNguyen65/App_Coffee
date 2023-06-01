@@ -1,7 +1,12 @@
+import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion1.dart';
+import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion2.dart';
+import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion3.dart';
+import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion4.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'SearchProduct.dart';
+import '../product/SearchProduct.dart';
 
 class SliderScreen extends StatefulWidget {
   const SliderScreen({super.key});
@@ -34,25 +39,25 @@ class _SliderScreenState extends State<SliderScreen> {
       advertisement: [
         Advertisement(
           imageUrl:
-              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+              'https://feed.thecoffeehouse.com/content/images/2023/04/NOTI--8-.jpg',
           name: 'HÈ CÓ ĐÔI - DEAL NHÀ CÓ CẶP',
           date: '01/05',
         ),
         Advertisement(
           imageUrl:
-              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+              'https://feed.thecoffeehouse.com/content/images/2023/04/NOTI--9-.jpg',
           name: 'HÈ THIỆT VUI - NHÀ KHUI DEAL',
           date: '01/05',
         ),
         Advertisement(
           imageUrl:
-              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+              'https://feed.thecoffeehouse.com/content/images/2023/04/NOTI--5-.jpg',
           name: 'MANG ĐI VUI VẺ - NHÀ MỜI 10%',
           date: '01/05',
         ),
         Advertisement(
           imageUrl:
-              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+              'https://feed.thecoffeehouse.com/content/images/2023/04/noti--7-.jpg',
           name: 'KHAO DEAL BẤT NGỜ',
           date: '01/05',
         ),
@@ -134,7 +139,9 @@ class _SliderScreenState extends State<SliderScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.orange),
+        iconTheme: const IconThemeData(
+          color: Color.fromARGB(255, 114, 74, 4),
+        ),
         leading: const Icon(Icons.person, size: 35),
         actions: [
           Padding(
@@ -257,6 +264,7 @@ class _SliderScreenState extends State<SliderScreen> {
             const SizedBox(
               height: 15,
             ),
+            //Product Home 1
             Container(
               height: 300, // Giới hạn chiều cao của ListView
               child: ListView(
@@ -273,7 +281,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              'https://luckychillcafe.com/thumbs/540x540x1/upload/product/imgl3261-3021.jpg?gidzl=rhbJEYsyhKFPhbOuBQQaHzQhLpuqzVn3ogzLR3Eag1ZFgmSpEwUlJSAhNJbgeATCmwqBPJFCFCfDABseGW',
+                              'https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__FREEZE_CHOCO.jpg',
                               width: 150,
                               height: 150,
                             ),
@@ -284,7 +292,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Bánh Cookie Đá Xoay',
+                              'FREEZE SÔ-CÔ-LA',
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
@@ -293,7 +301,7 @@ class _SliderScreenState extends State<SliderScreen> {
                             height: 3,
                           ),
                           const Text(
-                            '38.000đ',
+                            '55.000đ',
                             style: TextStyle(fontSize: 15),
                           ),
                           const SizedBox(
@@ -301,7 +309,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: const Color(0xFFFFF7E6),
+                                color: Color.fromARGB(255, 114, 74, 4),
                                 borderRadius: BorderRadius.circular(12)),
                             child: const Align(
                               alignment: Alignment.center,
@@ -311,7 +319,178 @@ class _SliderScreenState extends State<SliderScreen> {
                                 child: Text(
                                   'Chọn',
                                   style: TextStyle(
-                                      color: Color(0xFFE57905),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      // PRODUCT HOME 2
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__PHINDI_CHOCO.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'PHINDI CHOCO',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          const Text(
+                            '45.000đ',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 114, 74, 4),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      //PRODUCT HOME 3
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__BAC_XIU.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'BẠC XỈU ĐÁ',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          const Text(
+                            '29.000đ',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 114, 74, 4),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      //PRODUCT HOME 4
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              'https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/HLC_New_logo_5.1_Products__PHIN_DEN_DA.jpg',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'PHIN ĐEN ĐÁ',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                          const Text(
+                            '29.000đ',
+                            style: TextStyle(fontSize: 15),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 114, 74, 4),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 60, top: 10, right: 60, bottom: 12),
+                                child: Text(
+                                  'Chọn',
+                                  style: TextStyle(
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15),
                                 ),
@@ -329,7 +508,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              'https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__TRA_SEN_VANG_CU_NANG.jpg',
                               width: 150,
                               height: 150,
                             ),
@@ -340,7 +519,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Tra sua',
+                              'TRÀ SEN VÀNG',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
@@ -349,7 +528,7 @@ class _SliderScreenState extends State<SliderScreen> {
                             height: 3,
                           ),
                           const Text(
-                            '25.000đ',
+                            '45.000đ',
                             style: TextStyle(fontSize: 15),
                           ),
                           const SizedBox(
@@ -357,7 +536,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: const Color(0xFFFFF7E6),
+                                color: Color.fromARGB(255, 114, 74, 4),
                                 borderRadius: BorderRadius.circular(12)),
                             child: const Align(
                               alignment: Alignment.center,
@@ -367,7 +546,7 @@ class _SliderScreenState extends State<SliderScreen> {
                                 child: Text(
                                   'Chọn',
                                   style: TextStyle(
-                                      color: Color(0xFFE57905),
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15),
                                 ),
@@ -385,7 +564,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
+                              'https://www.highlandscoffee.com.vn/vnt_upload/product/04_2023/New_product/HLC_New_logo_5.1_Products__TRA_THANH_DAO-08.jpg',
                               width: 150,
                               height: 150,
                             ),
@@ -396,7 +575,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Tra sua',
+                              'TRÀ THANH ĐÀO',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
@@ -405,7 +584,7 @@ class _SliderScreenState extends State<SliderScreen> {
                             height: 3,
                           ),
                           const Text(
-                            '25.000đ',
+                            '45.000',
                             style: TextStyle(fontSize: 15),
                           ),
                           const SizedBox(
@@ -413,7 +592,7 @@ class _SliderScreenState extends State<SliderScreen> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: const Color(0xFFFFF7E6),
+                                color: Color.fromARGB(255, 114, 74, 4),
                                 borderRadius: BorderRadius.circular(12)),
                             child: const Align(
                               alignment: Alignment.center,
@@ -423,175 +602,7 @@ class _SliderScreenState extends State<SliderScreen> {
                                 child: Text(
                                   'Chọn',
                                   style: TextStyle(
-                                      color: Color(0xFFE57905),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                              width: 150,
-                              height: 150,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Tra sua',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            '25.000đ',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFFFF7E6),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: const Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 60, top: 10, right: 60, bottom: 12),
-                                child: Text(
-                                  'Chọn',
-                                  style: TextStyle(
-                                      color: Color(0xFFE57905),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                              width: 150,
-                              height: 150,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Tra sua',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            '25.000đ',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFFFF7E6),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: const Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 60, top: 10, right: 60, bottom: 12),
-                                child: Text(
-                                  'Chọn',
-                                  style: TextStyle(
-                                      color: Color(0xFFE57905),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Image.network(
-                              'https://i.pinimg.com/736x/94/47/44/944744fafc801a5f2de37158c009a2c3.jpg',
-                              width: 150,
-                              height: 150,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Tra sua',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                          const Text(
-                            '25.000đ',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFFFF7E6),
-                                borderRadius: BorderRadius.circular(12)),
-                            child: const Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 60, top: 10, right: 60, bottom: 12),
-                                child: Text(
-                                  'Chọn',
-                                  style: TextStyle(
-                                      color: Color(0xFFE57905),
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 15),
                                 ),
@@ -674,6 +685,7 @@ class _SliderScreenState extends State<SliderScreen> {
             const SizedBox(
               height: 20,
             ),
+            // uu dai dac biet 1
             Column(
               children: [
                 Row(
@@ -684,7 +696,11 @@ class _SliderScreenState extends State<SliderScreen> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          // Xử lý khi người dùng nhấn vào hình ảnh
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const KhuyenMai()),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -732,10 +748,15 @@ class _SliderScreenState extends State<SliderScreen> {
                     const SizedBox(
                       width: 15,
                     ),
+                    //uu dai dac biet 2
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          // Xử lý khi người dùng nhấn vào hình ảnh
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const KhuyenMai2()),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -788,10 +809,15 @@ class _SliderScreenState extends State<SliderScreen> {
                     const SizedBox(
                       width: 15,
                     ),
+                    //uu dai dac biet 3
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          // Xử lý khi người dùng nhấn vào hình ảnh
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const KhuyenMai3()),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -839,10 +865,15 @@ class _SliderScreenState extends State<SliderScreen> {
                     const SizedBox(
                       width: 15,
                     ),
+                    //uu dai dac biet 4
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          // Xử lý khi người dùng nhấn vào hình ảnh
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const KhuyenMai4()),
+                          );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

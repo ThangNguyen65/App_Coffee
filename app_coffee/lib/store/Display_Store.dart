@@ -1,6 +1,6 @@
-import 'package:app_coffee/Describe.dart';
-import 'package:app_coffee/Describe_Store.dart';
-import 'package:app_coffee/Search.dart';
+import 'package:app_coffee/store/Describe.dart';
+import 'package:app_coffee/store/Describe_Store.dart';
+import 'package:app_coffee/store/Search.dart';
 import 'package:flutter/material.dart';
 
 class MyHome extends StatefulWidget {

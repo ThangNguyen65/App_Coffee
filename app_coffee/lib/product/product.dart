@@ -307,7 +307,9 @@ class _testProductState extends State<testProduct> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.orange),
+        iconTheme: const IconThemeData(
+          color: Color.fromARGB(255, 114, 74, 4),
+        ),
         leading: const Icon(Icons.person, size: 35),
         title: const Center(
           child: Text('Thực Đơn'),
@@ -340,7 +342,7 @@ class _testProductState extends State<testProduct> {
                     Positioned(
                       right: 0,
                       top: 0,
-                        child: Container(
+                      child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: const BoxDecoration(
                           color: Colors.red,

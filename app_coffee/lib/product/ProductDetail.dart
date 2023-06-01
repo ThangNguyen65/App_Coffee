@@ -1,4 +1,4 @@
-import 'package:app_coffee/product.dart';
+import 'package:app_coffee/product/product.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable_text/expandable_text.dart';
 
