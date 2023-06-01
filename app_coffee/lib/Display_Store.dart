@@ -1,8 +1,7 @@
+import 'package:app_coffee/Describe.dart';
+import 'package:app_coffee/Describe_Store.dart';
+import 'package:app_coffee/Search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/Describe/Describe.dart';
-
-import 'package:flutter_project/Describe/Search.dart';
-import 'package:flutter_project/Search/Describe_Store.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});
