@@ -14,7 +14,7 @@ class main_pages extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return BottomNavBars();
+              return const BottomNavBars();
             } else {
               return auth_page();
             }

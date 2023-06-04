@@ -1,6 +1,6 @@
 import 'package:app_coffee/store/Display_Store.dart';
 import 'package:app_coffee/home/Home.dart';
-import 'package:app_coffee/product/product.dart';
+import 'package:app_coffee/product/prductlistscreen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ class _BottomNavBarsState extends State<BottomNavBars> {
               child: const SliderScreen(),
             ),
             Container(
-              child: const testProduct(),
+              child: Product(),
             ),
             Container(
               child: const MyHome(),

@@ -2,7 +2,9 @@ import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion1.dart';
 import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion2.dart';
 import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion3.dart';
 import 'package:app_coffee/Uu_Dai_Dac_Biet/Promotion4.dart';
+import 'package:app_coffee/cart/Cart.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -134,8 +136,20 @@ class _SliderScreenState extends State<SliderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
       appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0), // Chiều cao của đường viền
+          child: Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey, // Màu sắc của đường viền
+                  width: 1.0, // Độ dày của đường viền
+                ),
+              ),
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -148,24 +162,74 @@ class _SliderScreenState extends State<SliderScreen> {
             padding: const EdgeInsets.only(right: 15.0),
             child: Row(
               children: [
-                InkWell(
-                  child: const Icon(Icons.search, size: 35),
-                  onTap: () {
+                IconButton(
+                  icon: const Icon(Icons.search, size: 35),
+                  onPressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const SearchProduct(),
+                    //   ),
+                    // );
+                  },
+                ),
+                IconButton(
+                  icon: Stack(
+                    children: [
+                      const Icon(Icons.shopping_cart, size: 35),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          constraints: const BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
+                          ),
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection('carts')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                final cartItems = snapshot.data!.docs;
+                                final itemCount = cartItems.length;
+                                return Text(
+                                  '$itemCount',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                );
+                              }
+                              return const Text(
+                                '0',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                                textAlign: TextAlign.center,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SearchProduct(),
+                        builder: (context) => CartScreen(),
                       ),
                     );
                   },
                 ),
-                const SizedBox(
-                  width: 14,
-                ),
-                const Icon(
-                  Icons.shopping_cart,
-                  size: 35,
-                )
               ],
             ),
           ),

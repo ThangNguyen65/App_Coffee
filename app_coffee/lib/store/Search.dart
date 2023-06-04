@@ -1,3 +1,4 @@
+import 'package:app_coffee/BottomNavBar.dart';
 import 'package:app_coffee/store/Describe.dart';
 import 'package:app_coffee/store/Describe_Store.dart';
 import 'package:app_coffee/store/Display_Store.dart';
@@ -78,15 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-//Quay về
-  void navigateToPreviousPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MyHome(),
-      ),
-    );
-  }
+
 
   void navigateToProductDetail(Describe describeList) {
     Navigator.push(
@@ -104,13 +97,6 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
         elevation: 0.0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-          ),
-          color: Colors.black,
-          onPressed: navigateToPreviousPage,
-        ),
       ),
       body: Column(
         children: [
