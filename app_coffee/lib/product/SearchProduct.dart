@@ -1,369 +1,110 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-// import 'package:app_coffee/product/ProductDetail.dart';
-// import 'package:app_coffee/product/product.dart';
-// import 'package:flutter/material.dart';
+class ProductSearchScreen extends StatefulWidget {
+  @override
+  _ProductSearchScreenState createState() => _ProductSearchScreenState();
+}
 
-// class SearchProduct extends StatefulWidget {
-//   const SearchProduct({super.key});
+class _ProductSearchScreenState extends State<ProductSearchScreen> {
+  late TextEditingController _searchController;
+  List<Map<String, dynamic>> _searchResults = [];
 
-//   @override
-//   State<SearchProduct> createState() => _SearchProductState();
-// }
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
 
-// class _SearchProductState extends State<SearchProduct> {
-//   void navigateToProductDetail(Product product) {
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(
-//         builder: (context) => ProductDetail(product: product),
-//       ),
-//     );
-//   }
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
-//   static List<Product> list_product = [
-//     Product(
-//       name: 'Phin Đen Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 1.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Bạc Xỉu Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Bạc Xỉu Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 1.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Phin Đen Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Phin Sữa Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 1.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Americano Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 1.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Caramel Macchiato Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Cappuccino Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Espresso',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Latte Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Mocha Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Cappuccino Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Latte Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Mocha Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Americano Đá',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 1.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Caramel Macchiato Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Dưa Hấu Vải',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 1.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Xanh Đậu Đỏ Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Thạch Đào',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Sen Vàng Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Sen Vàng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Xanh Đậu Đỏ ',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Thạch Đào Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Thạch Đào',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Thạch Vải',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Sen Vàng Củ Năng Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Thanh Đào Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'Trà Thạch Vải Nóng',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'PhinDi Hạnh Nhân',
-//       imageUrl: 'assets/images/coffee.png',
-//       price: 3.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'PhinDi Choco',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//     Product(
-//       name: 'PhinDi Kem Sữa',
-//       imageUrl: 'assets/images/tea.png',
-//       price: 2.99,
-//       discribe:
-//           'Đắng Đậm, Thơm Đặc Biệt Nồng Nàn, Không chua. Hạt Robusta-Culi-Arabica-Moka-Cherry là Dòng cafe đặc biệt thượng hạng, kết hợp hoàn hảo giữa Hương thơm ngây ngất từng vị  của từng hạt Moka-Arabica-Cherrfy, vị đắng đậm đà của Culi và độ giàu caffeine của Robusta. Công thức độc quyền của Galaxy Coffee tạo ra dòng cà phê xuất sắc  cực kì thơm ngon  vừa mạnh mẽ, vừa tỏa hương thơm, vị chua và vị đắng hòa quyện hài hòa. Đây chính là sự lựa chọn hoàn hảo cho để pha những ly, cà phê rang mộc như Cappuccino, Latte, Espresso, Americano với lớp crema dày và vị đậm đà thơm ngon. Thành  phần cà phê rang : Robusta-Culi-Arabica- Moka- Cherry. Nguyên chất cà phê rang xay 100%, không trộn đậu bắp, cà phê rang mộc. Cà phê rang không sao tẩm hương liệu, hóa chất. Phù hợp khẩu vị người Việt thơm cà phê tự nhiên, vị đắng nhẹ, không chua',
-//     ),
-//   ];
+  void searchProduct(String searchQuery) {
+    final String searchValue = searchQuery.toLowerCase();
 
-//   List<Product> display_list_product = List.from(list_product);
+    FirebaseFirestore.instance
+        .collection('products ')
+        .orderBy('name')
+        .startAt([searchValue])
+        .endAt([searchValue + '\uf8ff'])
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+          if (querySnapshot.docs.isNotEmpty) {
+            // Tìm thấy kết quả
+            List<Map<String, dynamic>> results = [];
+            querySnapshot.docs.forEach((DocumentSnapshot document) {
+              final data = document.data() as Map<String, dynamic>;
+              final productName = data['name'] as String;
+              final productImage = data['image'] as String;
+              final productPrice = data['price'] as num;
+              results.add({
+                'productName': productName,
+                'productImage': productImage,
+                'productPrice': productPrice,
+              });
+            });
+            setState(() {
+              _searchResults = results;
+            });
+          } else {
+            // Không tìm thấy kết quả
+            setState(() {
+              _searchResults = [];
+            });
+          }
+        })
+        .catchError((error) {
+          // Xử lý lỗi
+          print('Error searching for products: $error');
+        });
+  }
 
-//   void updateList(String query) {
-//     setState(() {
-//       display_list_product = list_product
-//           .where((product) =>
-//               product.name.toLowerCase().contains(query.toLowerCase()))
-//           .toList();
-//     });
-//   }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Product Search'),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                labelText: 'Search',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    String searchQuery = _searchController.text.trim();
+                    searchProduct(searchQuery);
+                  },
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _searchResults.length,
+              itemBuilder: (BuildContext context, int index) {
+                final result = _searchResults[index];
+                final productName = result['productName'] as String;
+                final productImage = result['productImage'] as String;
+                final productPrice = result['productPrice'] as num;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         shape: const RoundedRectangleBorder(
-//           borderRadius: BorderRadius.vertical(
-//             bottom: Radius.circular(20),
-//           ),
-//         ),
-//         title: TextField(
-//           decoration: const InputDecoration(
-//             hintText: 'Search products',
-//             border: InputBorder.none,
-//           ),
-//           onChanged: updateList,
-//         ),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.only(right: 0, left: 0, bottom: 0),
-//         child: Column(
-//           children: [
-//             Expanded(
-//               child: display_list_product.length == 0
-//                   ? const Center(
-//                       child: Text(
-//                         'Không có dữ liệu',
-//                         style: TextStyle(
-//                             color: Colors.black,
-//                             fontSize: 22.0,
-//                             fontWeight: FontWeight.bold),
-//                       ),
-//                     )
-//                   : ListView.builder(
-//                       itemCount: display_list_product.length,
-//                       // padding: const EdgeInsets.all(5),
-//                       itemBuilder: (context, index) {
-//                         return Column(
-//                           children: [
-//                             GestureDetector(
-//                               onTap: () {
-//                                 navigateToProductDetail(
-//                                     display_list_product[index]);
-//                               },
-//                               child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   Row(
-//                                     crossAxisAlignment:
-//                                         CrossAxisAlignment.start,
-//                                     children: [
-//                                       const SizedBox(width: 10),
-//                                       Image.asset(
-//                                         display_list_product[index].imageUrl!,
-//                                         width: 80,
-//                                         height: 80,
-//                                       ),
-//                                       const SizedBox(width: 10),
-//                                       Column(
-//                                         crossAxisAlignment:
-//                                             CrossAxisAlignment.start,
-//                                         children: [
-//                                           Text(
-//                                             display_list_product[index].name!,
-//                                             style: const TextStyle(
-//                                               fontSize: 16,
-//                                               fontWeight: FontWeight.bold,
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ],
-//                                   ),
-//                                   Container(
-//                                     width:
-//                                         60, // Đặt chiều rộng tùy ý cho giá tiền
-//                                     child: Column(
-//                                       mainAxisAlignment:
-//                                           MainAxisAlignment.spaceBetween,
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.start,
-//                                       children: [
-//                                         Text(
-//                                           '${display_list_product[index].price!}',
-//                                           style: TextStyle(
-//                                             fontSize: 16,
-//                                             fontWeight: FontWeight.bold,
-//                                             color: Colors.grey[700],
-//                                           ),
-//                                         ),
-//                                         const SizedBox(height: 20),
-//                                         IconButton(
-//                                           icon: const Icon(
-//                                               Icons.shopping_cart_checkout),
-//                                           onPressed: () {
-//                                             // addToCart(
-//                                             //     product); // Thay `product` bằng sản phẩm bạn muốn thêm vào giỏ hàng
-//                                           },
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                           ],
-//                         );
-//                       },
-//                     ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+                return ListTile(
+                  leading: Image.network(productImage),
+                  title: Text(productName),
+                  subtitle: Text('Price: $productPrice'),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

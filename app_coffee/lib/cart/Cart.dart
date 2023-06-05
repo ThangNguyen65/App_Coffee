@@ -117,7 +117,7 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void navigateToOrderScreen(String orderId) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => OrderScreen(orderId: orderId),

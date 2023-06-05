@@ -1,3 +1,4 @@
+import 'package:app_coffee/product/ProductDetail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -30,48 +31,63 @@ class ProductListScreen extends StatelessWidget {
             final productName = data['name'] as String;
             final productImage = data['image'] as String;
             final productPrice = data['price'] as num;
-            return Container(
-              padding: const EdgeInsets.only(top: 24, bottom: 10),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      color: Color.fromARGB(255, 190, 188, 188), width: 1),
+            final productDescription = data['description'] as String;
+            return GestureDetector(
+              onTap: () {
+                showProductDetail(
+                  context,
+                  productName,
+                  productImage,
+                  productPrice,
+                  productDescription,
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.only(top: 24, bottom: 10),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                        color: Color.fromARGB(255, 190, 188, 188), width: 1),
+                  ),
                 ),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.network(
-                    productImage,
-                    width: 130,
-                    height: 130,
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          productName,
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          '$productPrice đ',
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.network(
+                      productImage,
+                      width: 130,
+                      height: 130,
                     ),
-                  ),
-                  IconButton(
-                    icon:const Icon(Icons.shopping_cart),
-                    onPressed: () {
-                      addToCart(
-                          context, productName, productImage, productPrice);
-                    },
-                  ),
-                ],
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            productName,
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '${productPrice} đ', // Format the price
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.shopping_cart),
+                      onPressed: () {
+                        addToCart(
+                          context,
+                          productName,
+                          productImage,
+                          productPrice,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           }).toList(),
@@ -80,8 +96,12 @@ class ProductListScreen extends StatelessWidget {
     );
   }
 
-  void addToCart(BuildContext context, String productName, String productImage,
-      num productPrice) {
+  void addToCart(
+    BuildContext context,
+    String productName,
+    String productImage,
+    num productPrice,
+  ) {
     final cartRef = FirebaseFirestore.instance.collection('carts');
     final newCartItem = {
       'productName': productName,
@@ -114,5 +134,25 @@ class ProductListScreen extends StatelessWidget {
     } else {
       print('Giá trị null không thể thêm vào giỏ hàng');
     }
+  }
+
+  void showProductDetail(
+    BuildContext context,
+    String productName,
+    String productImage,
+    num productPrice,
+    String productDescription,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductDetailScreen(
+          productName: productName,
+          productImage: productImage,
+          productPrice: productPrice,
+          productDescription: productDescription,
+        ),
+      ),
+    );
   }
 }

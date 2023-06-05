@@ -1,6 +1,7 @@
 import 'package:app_coffee/product/product.dart';
 import 'package:app_coffee/product/SearchProduct.dart';
 import 'package:app_coffee/cart/Cart.dart';
+import 'package:app_coffee/store/Search.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -47,12 +48,12 @@ class _ProductState extends State<Product> {
                 IconButton(
                   icon: const Icon(Icons.search, size: 35),
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const SearchProduct(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductSearchScreen(),
+                      ),
+                    );
                   },
                 ),
                 IconButton(
