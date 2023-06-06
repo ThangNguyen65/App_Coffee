@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/Search/Display_Store.dart';
+
+import '../Display_Store.dart';
 
 class KhuyenMai5 extends StatefulWidget {
   const KhuyenMai5({super.key});

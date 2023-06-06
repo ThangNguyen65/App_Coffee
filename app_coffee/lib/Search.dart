@@ -1,8 +1,9 @@
+import 'package:app_coffee/Describe.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project/Describe/Describe.dart';
 
-import 'package:flutter_project/Search/Display_Store.dart';
-import 'package:flutter_project/Search/Describe_Store.dart';
+import 'Describe_Store.dart';
+import 'Display_Store.dart';
+
 
 class SearchScreen extends StatefulWidget {
   void navigateToProductDetail(Describe describe) {

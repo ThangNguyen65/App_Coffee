@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/Describe/Describe.dart';
 
-import 'package:flutter_project/Describe/Search.dart';
-import 'package:flutter_project/Search/Describe_Store.dart';
+import 'Describe.dart';
+import 'Describe_Store.dart';
+import 'Search.dart';
+
+
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key});

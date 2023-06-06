@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/Describe/Describe.dart';
+
+import 'Describe.dart';
 
 class DescribeDetailScreen extends StatefulWidget {
   final Describe describe;
