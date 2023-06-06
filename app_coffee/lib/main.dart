@@ -1,14 +1,10 @@
 import 'package:app_coffee/BottomNavBar.dart';
 import 'package:app_coffee/test.dart';
-import 'editProfile.dart';
 
-import 'package:app_coffee/login_page.dart';
 
 import 'package:app_coffee/auth/auth_page.dart';
-import 'package:app_coffee/dangky.dart';
-import 'package:app_coffee/login_page.dart';
-import 'package:app_coffee/auth/main_page.dart';
 
+import 'package:app_coffee/auth/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -25,7 +21,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My App',
-      home: PurchaseHistoryPage(),
+      home: main_pages(),
+
       theme: ThemeData(
         colorSchemeSeed: const Color(0xff6750a4),
         useMaterial3: true,

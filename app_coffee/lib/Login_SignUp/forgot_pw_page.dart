@@ -26,7 +26,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Text('Password reset link sent! Check your email'),
+            content: Text(
+                'Đã gửi liên kết đặt lại mật khẩu! Kiểm tra hộp thư điện tử của bạn'),
           );
         },
       );

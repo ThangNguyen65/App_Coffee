@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Display_Store.dart';
+
+import '../store/Display_Store.dart';
 
 class KhuyenMai5 extends StatefulWidget {
   const KhuyenMai5({super.key});

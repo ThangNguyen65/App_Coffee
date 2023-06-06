@@ -1,6 +1,9 @@
+import 'package:app_coffee/store/Describe.dart';
 import 'package:flutter/material.dart';
 
+
 import 'Describe.dart';
+
 
 class DescribeDetailScreen extends StatefulWidget {
   final Describe describe;
@@ -11,7 +14,7 @@ class DescribeDetailScreen extends StatefulWidget {
 }
 
 class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
- bool isHovered = false;
+  bool isHovered = false;
   bool isImageExpanded = false;
   String expandedImageUrl = '';
 
@@ -39,7 +42,7 @@ class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
             top: 0,
             child: Container(
               alignment: Alignment.center,
-              height: size.height - 400,
+              height: size.height - 100,
               width: size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -54,7 +57,8 @@ class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
                               ? widget.describe.imageUrl1
                               : index == 2
                                   ? widget.describe.imageUrl2
-                                  : widget.describe.imageUrl3), // Sử dụng đường dẫn ảnh mới từ các thuộc tính imageUrl, imageUrl1, imageUrl2 và imageUrl3
+                                  : widget.describe
+                                      .imageUrl3), // Sử dụng đường dẫn ảnh mới từ các thuộc tính imageUrl, imageUrl1, imageUrl2 và imageUrl3
                 ),
               ),
             ),
@@ -71,7 +75,7 @@ class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
             ),
           ),
           Positioned(
-            top: 100,
+            top: 30,
             right: 24,
             child: Container(
               height: 276,
@@ -190,30 +194,30 @@ class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
                 children: [
                   Text(
                     widget.describe.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF404040),
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     widget.describe.address,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     widget.describe.time,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF404040),
                       fontSize: 18,
                     ),
                   ),
                   //Đường kẻ
-                  Divider(
+                  const Divider(
                     height: 30,
                     thickness: 1,
                     color: Color(0xFFBDBDBD),
@@ -244,7 +248,7 @@ class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
                     Expanded(
                       child: Text(
                         widget.describe.detailed_address,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           color: Colors.black,
                         ),
@@ -342,7 +346,7 @@ class _DescribeDetailScreenState extends State<DescribeDetailScreen> {
                       Expanded(
                         child: Text(
                           widget.describe.favorite,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                           ),

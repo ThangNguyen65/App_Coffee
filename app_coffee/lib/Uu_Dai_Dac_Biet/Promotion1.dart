@@ -1,6 +1,10 @@
+import 'package:app_coffee/BottomNavBar.dart';
+import 'package:app_coffee/store/Display_Store.dart';
 import 'package:flutter/material.dart';
 
-import '../Display_Store.dart';
+
+
+
 
 class KhuyenMai extends StatefulWidget {
   const KhuyenMai({super.key});
@@ -27,7 +31,7 @@ class _KhuyenMaiState extends State<KhuyenMai> {
           color: Colors.black,
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MyHome()),
+              MaterialPageRoute(builder: (context) => BottomNavBars()),
             );
           },
         ),
@@ -67,7 +71,7 @@ class _KhuyenMaiState extends State<KhuyenMai> {
                   ),
                   const SizedBox(height: 20),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
                     child: Image.network(
                       'https://feed.thecoffeehouse.com/content/images/2023/04/NOTI--8-.jpg',
                       fit: BoxFit.cover,
@@ -89,15 +93,16 @@ class _KhuyenMaiState extends State<KhuyenMai> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.coffee, size: 30),
-                SizedBox(width: 10),
+                SizedBox(height: 10),
                 Text(
                   'MÌNH CÀ PHÊ NHÉ!',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
+            const SizedBox(height: 10),
             const Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Text(
                 '👉 Ghé Nhà nha: https://tchapp.page.link/menu609 \n\n👉 Điện thoại: 18006936',
                 style: TextStyle(

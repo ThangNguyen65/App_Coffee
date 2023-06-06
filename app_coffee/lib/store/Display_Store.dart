@@ -1,9 +1,12 @@
+import 'package:app_coffee/store/Describe.dart';
+import 'package:app_coffee/store/Describe_Store.dart';
+import 'package:app_coffee/store/Search.dart';
 import 'package:flutter/material.dart';
+
 
 import 'Describe.dart';
 import 'Describe_Store.dart';
 import 'Search.dart';
-
 
 
 class MyHome extends StatefulWidget {
@@ -31,6 +34,8 @@ class _MyHomeState extends State<MyHome> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 238, 238, 1),
       appBar: AppBar(
+        title: const Text('CỬA HÀNG'),
+        centerTitle: true,
         backgroundColor: Color.fromRGBO(238, 238, 238, 1),
         elevation: 0.0,
       ),
@@ -92,7 +97,7 @@ class _MyHomeState extends State<MyHome> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
@@ -101,14 +106,14 @@ class _MyHomeState extends State<MyHome> {
                                   children: [
                                     Text(
                                       describe.address,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       describe.name,
-                                      style: TextStyle(fontSize: 16),
+                                      style: const TextStyle(fontSize: 16),
                                     ),
                                     const SizedBox(height: 15.0),
                                   ],

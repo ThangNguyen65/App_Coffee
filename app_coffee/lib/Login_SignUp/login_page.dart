@@ -1,5 +1,5 @@
 import 'package:app_coffee/BottomNavBar.dart';
-import 'package:app_coffee/forgot_pw_page.dart';
+import 'package:app_coffee/Login_SignUp/forgot_pw_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -54,11 +54,11 @@ class _LoginPageState extends State<LoginPage> {
 
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return 'Vui lòng đăng nhập mật khẩu';
     }
     // Kiểm tra độ dài mật khẩu
     if (value.length < 6) {
-      return 'Password must be at least 6 characters long';
+      return 'Mật khẩu phải có độ dài ít nhất 6 ký tự';
     }
     return null;
   }
@@ -79,20 +79,20 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 10),
+            const SizedBox(height: 90),
             Container(
               child: const CircleAvatar(
                 backgroundColor: Color.fromARGB(255, 165, 107, 6),
                 minRadius: 80.0,
                 child: CircleAvatar(
                   radius: 70.0,
-                  backgroundImage: AssetImage('assets/images/nen.png'),
+                  backgroundImage: AssetImage('assets/images/nen.jpg'),
                 ),
               ),
             ),
             Container(
               width: 500,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                         validator: _validateEmail,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: 350,
                       child: TextFormField(
@@ -140,54 +140,28 @@ class _LoginPageState extends State<LoginPage> {
                             vertical: 12,
                             horizontal: 16,
                           ),
-                          hintStyle: TextStyle(color: Colors.brown),
+                          hintStyle: const TextStyle(color: Colors.brown),
                         ),
                         obscureText: true,
                         validator: _validatePassword,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return ForgotPasswordPage();
-                                }),
-                              );
-                            },
-                            child: const Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 110, 68, 6),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 60.0),
                       child: GestureDetector(
                         onTap: signIn,
                         child: Container(
-                          padding: const EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 114, 74, 4),
-                            borderRadius: BorderRadius.circular(12),
+                            color: const Color.fromARGB(255, 114, 74, 4),
+                            borderRadius: BorderRadius.circular(18),
                           ),
                           child: const Center(
                             child: Text(
-                              "Sign In",
+                              "ĐĂNG NHẬP",
                               style: TextStyle(
-                                color: Color.fromARGB(255, 213, 201, 236),
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -197,27 +171,73 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 25),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Not a member?',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: widget.showRegisterPage,
-                          child: const Text(
-                            'Register now',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 62, 58, 2),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.only(right: 34, left: 34),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return const ForgotPasswordPage();
+                                        }),
+                                      );
+                                    },
+                                    child: const Text(
+                                      'Quên mật khẩu?',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 110, 68, 6),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              GestureDetector(
+                                onTap: widget.showRegisterPage,
+                                child: const Text(
+                                  'Register now',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 110, 68, 6),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     const Text(
+                    //       'Not a member?',
+                    //       style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     ),
+                    //     GestureDetector(
+                    //       onTap: widget.showRegisterPage,
+                    //       child: const Text(
+                    //         'Register now',
+                    //         style: TextStyle(
+                    //           color: Color.fromARGB(255, 62, 58, 2),
+                    //           fontWeight: FontWeight.bold,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

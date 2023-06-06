@@ -2,8 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PurchaseHistoryPage extends StatelessWidget {
+class PurchaseHistoryPage extends StatefulWidget {
+  @override
+  _PurchaseHistoryPageState createState() => _PurchaseHistoryPageState();
+}
+
+class _PurchaseHistoryPageState extends State<PurchaseHistoryPage> {
   late Query<Map<String, dynamic>> cartsCollection;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeFirebase();
+  }
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp();
@@ -16,53 +27,35 @@ class PurchaseHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lịch sử mua hàng'),
+        title: Text('Order History'),
       ),
-      body: FutureBuilder<void>(
-        future: initializeFirebase(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('orders').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
+            return CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Text('No data available');
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                var orderData =
+                    snapshot.data!.docs[index].data() as Map<String, dynamic>;
+                return ListTile(
+                  title: Text('Order ID: ${orderData['orderId'] ?? 'N/A'}'),
+                  subtitle:
+                      Text('Total Price: ${orderData['totalPrice'] ?? 'N/A'}'),
+                  // leading: orderData['productImage'] != null
+                  //     ? Image.network(orderData['productImage'])
+                  //     : Container(),
+                  // và các thông tin khác
+                );
+              },
             );
           }
-
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
-
-          return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            stream: cartsCollection.snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return Text('No purchase history found.');
-              }
-
-              return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  var cart = snapshot.data!.docs[index].data();
-                  return ListTile(
-                    leading: Image.network(cart['productImage']),
-                    title: Text(cart['productName']),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Price: ${cart['productPrice'].toString()}'),
-                        Text('Quantity: ${cart['quantity'].toString()}'),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-          );
         },
       ),
     );

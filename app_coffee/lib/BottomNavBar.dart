@@ -1,9 +1,11 @@
-import 'package:app_coffee/Home.dart';
-import 'package:app_coffee/product.dart';
+
+import 'package:app_coffee/store/Display_Store.dart';
+import 'package:app_coffee/home/Home.dart';
+import 'package:app_coffee/product/prductlistscreen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'Khac.dart';
+import 'khac/Khac.dart';
 
 class BottomNavBars extends StatefulWidget {
   const BottomNavBars({Key? key}) : super(key: key);
@@ -46,11 +48,11 @@ class _BottomNavBarsState extends State<BottomNavBars> {
               child: const SliderScreen(),
             ),
             Container(
-              child: const testProduct(),
+              child: Product(),
             ),
-            // Container(
-            //   child: const MyHome(),
-            // ),
+            Container(
+              child: const MyHome(),
+            ),
             Container(
               child: const Khac(),
             ),
@@ -66,16 +68,28 @@ class _BottomNavBarsState extends State<BottomNavBars> {
         },
         items: <BottomNavyBarItem>[
           BottomNavyBarItem(
-              title: const Text('Trang chủ'), icon: const Icon(Icons.home)),
+            title: const Text('Trang chủ'),
+            icon: const Icon(
+              Icons.home,
+              color: Color.fromARGB(255, 114, 74, 4),
+            ),
+            activeColor: Color.fromARGB(255, 114, 74, 4),
+          ),
           BottomNavyBarItem(
-              title: const Text('Đặt hàng'),
-              icon: const Icon(Icons.food_bank_sharp)),
+            title: const Text('Đặt hàng'),
+            icon: const Icon(Icons.food_bank_sharp),
+            activeColor: Color.fromARGB(255, 114, 74, 4),
+          ),
           BottomNavyBarItem(
-              title: const Text('Cửa hàng'),
-              icon: const Icon(Icons.shop_two_rounded)),
+            title: const Text('Cửa hàng'),
+            icon: const Icon(Icons.shop_two_rounded),
+            activeColor: Color.fromARGB(255, 114, 74, 4),
+          ),
           BottomNavyBarItem(
-              title: const Text('Khác'),
-              icon: const Icon(Icons.wrap_text_outlined)),
+            title: const Text('Khác'),
+            icon: const Icon(Icons.wrap_text_outlined),
+            activeColor: Color.fromARGB(255, 114, 74, 4),
+          ),
         ],
       ),
     );
