@@ -1,7 +1,7 @@
+import 'package:app_coffee/BottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 
-import '../store/Display_Store.dart';
 
 class KhuyenMai5 extends StatefulWidget {
   const KhuyenMai5({super.key});
@@ -28,7 +28,7 @@ class _KhuyenMai5State extends State<KhuyenMai5> {
           color: Colors.black,
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MyHome()),
+              MaterialPageRoute(builder: (context) => BottomNavBars()),
             );
           },
         ),

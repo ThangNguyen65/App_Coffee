@@ -1,7 +1,6 @@
 import 'package:app_coffee/product/product.dart';
 import 'package:app_coffee/product/SearchProduct.dart';
 import 'package:app_coffee/cart/Cart.dart';
-import 'package:app_coffee/store/Search.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
